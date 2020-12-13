@@ -65,15 +65,16 @@ class CustomAccountManager(BaseUserManager):
         user.save()
         return user
     
-class NewUser(AbstractBaseUser, PermissionsMixin):
     
+class NewUser(AbstractBaseUser, PermissionsMixin):
+    """Creating custom User"""
     email = models.EmailField(_("email address"), max_length=254, unique=True)
     user_name = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length=500, blank=True)
-    phone_number = PhoneNumberField()
+    phone_number = PhoneNumberField(max_length=12)
     gender = models.CharField(max_length=6, choices=[('M', 'Male'), ('F','Female')])
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
